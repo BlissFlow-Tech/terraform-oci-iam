@@ -83,15 +83,17 @@ output "identity_group" {
 }
 
 output "user_group_attachment" {
-  description = "The user group membership created"
+  description = "The group memberships created, keyed like identity_users"
   value = {
-    user_id        = one(oci_identity_user_group_membership.this[*].user_id)
-    group_id       = one(oci_identity_user_group_membership.this[*].group_id)
-    compartment_id = one(oci_identity_user_group_membership.this[*].compartment_id)
-    id             = one(oci_identity_user_group_membership.this[*].id)
-    inactive_state = one(oci_identity_user_group_membership.this[*].inactive_state)
-    state          = one(oci_identity_user_group_membership.this[*].state)
-    time_created   = one(oci_identity_user_group_membership.this[*].time_created)
+    for k, m in oci_identity_user_group_membership.this : k => {
+      user_id        = m.user_id
+      group_id       = m.group_id
+      compartment_id = m.compartment_id
+      id             = m.id
+      inactive_state = m.inactive_state
+      state          = m.state
+      time_created   = m.time_created
+    }
   }
 }
 
