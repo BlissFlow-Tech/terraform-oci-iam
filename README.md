@@ -62,7 +62,7 @@ module "iam_user" {
 
 * OCI only accepts identity writes in the tenancy's home region, so the module needs an `oci.home` provider alias pointing there. Every identity resource except the API key goes through it.
 * Users are keyed by user name; set `name` to use a different one.
-* Create groups and users in separate module calls; group membership is not managed by this version.
+* When `identity_group` and `identity_users` are set in the same call, every user joins the group.
 * A user gets a customer secret key when `customer_secret_key_display_name` is set, an auth token when `auth_token_description` is set, and a generated API key when `create_auth_token = true`.
 * The `identity_users` output is sensitive because it carries the secret key and auth token values.
 
@@ -118,7 +118,7 @@ module "iam_user" {
 | identity\_group | The group created, or null |
 | identity\_policy | The policy created, or null |
 | identity\_users | Detailed information for all managed identity users, including their keys and tokens. |
-| user\_group\_attachment | The user group membership created |
+| user\_group\_attachment | The group memberships created, keyed like identity\_users |
 <!-- END_TF_DOCS -->
 
 ## License

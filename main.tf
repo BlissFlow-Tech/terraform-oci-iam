@@ -32,11 +32,11 @@ resource "oci_identity_user" "this" {
 }
 
 resource "oci_identity_user_group_membership" "this" {
-  count          = var.identity_group != null && var.identity_users != null ? 1 : 0
+  for_each       = var.identity_group != null && var.identity_users != null ? var.identity_users : {}
   provider       = oci.home
   group_id       = oci_identity_group.this[0].id
-  user_id        = oci_identity_user.this[0].id
-  compartment_id = oci_identity_user.this[0].compartment_id
+  user_id        = oci_identity_user.this[each.key].id
+  compartment_id = oci_identity_user.this[each.key].compartment_id
 }
 
 resource "oci_identity_user_capabilities_management" "this" {
