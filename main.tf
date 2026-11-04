@@ -92,7 +92,7 @@ resource "oci_identity_domain" "this" {
   compartment_id            = var.identity_domain.compartment_id
   display_name              = var.identity_domain.display_name
   home_region               = var.identity_domain.home_region
-  license_type              = var.identity_domain.type
+  license_type              = var.identity_domain.license_type
   admin_email               = var.identity_domain.admin != null ? var.identity_domain.admin.email : null
   admin_first_name          = var.identity_domain.admin != null ? var.identity_domain.admin.first_name : null
   admin_last_name           = var.identity_domain.admin != null ? var.identity_domain.admin.last_name : null
