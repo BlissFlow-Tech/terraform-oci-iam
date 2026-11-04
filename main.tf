@@ -96,7 +96,7 @@ resource "oci_identity_domain" "this" {
   admin_email               = var.identity_domain.admin != null ? var.identity_domain.admin.email : null
   admin_first_name          = var.identity_domain.admin != null ? var.identity_domain.admin.first_name : null
   admin_last_name           = var.identity_domain.admin != null ? var.identity_domain.admin.last_name : null
-  admin_user_name           = var.identity_domain.admin != null ? var.identity_domain.admin.last_name : null
+  admin_user_name           = var.identity_domain.admin != null ? var.identity_domain.admin.user_name : null
   defined_tags              = var.identity_domain.defined_tags
   freeform_tags             = var.identity_domain.freeform_tags
   is_hidden_on_login        = var.identity_domain.is_hidden_on_login
