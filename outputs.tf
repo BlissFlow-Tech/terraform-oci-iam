@@ -37,6 +37,17 @@ output "identity_users" {
       state                          = user.state
       time_created                   = user.time_created
 
+      auth_token = contains(keys(oci_identity_auth_token.this), k) ? {
+        id             = oci_identity_auth_token.this[k].id
+        description    = oci_identity_auth_token.this[k].description
+        token          = oci_identity_auth_token.this[k].token
+        user_id        = oci_identity_auth_token.this[k].user_id
+        inactive_state = oci_identity_auth_token.this[k].inactive_state
+        state          = oci_identity_auth_token.this[k].state
+        time_created   = oci_identity_auth_token.this[k].time_created
+        time_expires   = oci_identity_auth_token.this[k].time_expires
+      } : null
+
       customer_secret_key = contains(keys(oci_identity_customer_secret_key.this), k) ? {
         id             = oci_identity_customer_secret_key.this[k].id
         user_id        = oci_identity_customer_secret_key.this[k].user_id
