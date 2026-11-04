@@ -53,6 +53,14 @@ output "identity_users" {
         key_value   = oci_identity_api_key.this[k].key_value
         user_id     = oci_identity_api_key.this[k].user_id
       } : null
+
+      api_key = contains(keys(oci_identity_api_key.this), k) ? {
+        id              = oci_identity_api_key.this[k].id
+        fingerprint     = oci_identity_api_key.this[k].fingerprint
+        public_key_pem  = oci_identity_api_key.this[k].key_value
+        private_key_pem = tls_private_key.this[k].private_key_pem
+        user_id         = oci_identity_api_key.this[k].user_id
+      } : null
     }
   }
 }
