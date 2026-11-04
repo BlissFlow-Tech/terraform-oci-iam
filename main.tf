@@ -86,7 +86,7 @@ resource "oci_identity_auth_token" "this" {
 }
 
 resource "oci_identity_domain" "this" {
-  count                     = can(var.identity_domain.create) ? 1 : 0
+  count                     = try(var.identity_domain.create, false) ? 1 : 0
   provider                  = oci.home
   description               = var.identity_domain.description
   compartment_id            = var.identity_domain.compartment_id
