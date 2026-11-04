@@ -110,7 +110,8 @@ resource "oci_identity_api_key" "this" {
     for k, v in(var.identity_users != null ? var.identity_users : {}) :
     k => v if lookup(v, "create_auth_token", false) == true
   }
-  key_value = tls_private_key.this[each.key].id
+  provider  = oci.home
+  key_value = tls_private_key.this[each.key].public_key_pem
   user_id   = oci_identity_user.this[each.key].id
 }
 
@@ -119,6 +120,6 @@ resource "tls_private_key" "this" {
     for k, v in(var.identity_users != null ? var.identity_users : {}) :
     k => v if lookup(v, "create_auth_token", false) == true
   }
-  algorithm = "ECDSA"
-  rsa_bits  = "4096"
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
