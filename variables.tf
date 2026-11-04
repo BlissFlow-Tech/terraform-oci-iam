@@ -75,7 +75,6 @@ variable "identity_domain" {
       last_name  = optional(string)
       user_name  = optional(string)
     }))
-    type                      = optional(string, "free")
     defined_tags              = optional(map(string))
     freeform_tags             = optional(map(string))
     is_hidden_on_login        = optional(bool)
