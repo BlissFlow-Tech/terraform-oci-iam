@@ -12,7 +12,7 @@ provider "oci" {
 
 module "iam_group" {
   source  = "blissflow-tech/iam/oci"
-  version = "~> 1.0"
+  version = "~> 1.1"
 
   providers = {
     oci      = oci
